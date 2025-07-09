@@ -1,9 +1,11 @@
 import json
 import os
 
+# file to store expense and budget data
 DATA_FILE = "budget_data.json"
 
 class ExpenseManager:
+    """Handles expense tracking: add, delete, and list expenses """
     def __init__(self):
         self.expenses = {}
     
@@ -23,6 +25,7 @@ class ExpenseManager:
         return self.expenses
 
 class BudgetManager:
+    """Manages budget goals and generates budget summaries"""
     def __init__(self):
         self.budget_goal = None
     
@@ -57,6 +60,7 @@ class BudgetManager:
                     f"3. Suggested Savings:${suggested_savings:.2f}")
 
 class BudgetApp:
+    """Manages expenses, budgeting, and data persistence"""
     def __init__(self):
         self.expense_manager = ExpenseManager()
         self.budget_manager = BudgetManager()
@@ -83,6 +87,7 @@ class BudgetApp:
             self.budget_manager.budget_goal = data.get("budget_goal", None)
         print("Data loaded successfully.")
 
+    # autosave decorator to persist data after every action
     def autosave(method):
         def wrapper(self, *args, **kwargs):
             result = method(self, *args, **kwargs)
